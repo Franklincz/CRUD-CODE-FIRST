@@ -1,0 +1,122 @@
+﻿
+@model IEnumerable<ExampleCrud.netCore.Models.OfertaLaboral>
+@{
+
+
+    ViewData["Title"] = "Lista de ofertas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+
+<div class="container">
+    <!--para recibir el mensaje de registro correctamente-->
+     @if(TempData["mensaje"]!= null)
+            {
+
+                <div class="alert alert-warning alert-dismissible fade show "role="alert">
+
+                    @TempData["mensaje"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+            }
+
+    <div class="row">
+        <div class="col-sm-6">
+
+            <h3>LISTA DE OFERTAS</h3>
+
+        </div>
+
+        <div class="col-sm-6">
+
+        <a class="btn btn-success d-block" asp-action="CrearOferta" asp-controller="OfertaLaboral">Agregar</a>
+
+        </div>
+    </div>
+
+    <!--para todos los items-->
+
+
+    <div class="row">
+
+           @if (Model.Count() > 0)
+            {
+               <table class="table table-bordered table-striped" >
+                   <thead>
+                       <tr>
+                           <td>@Html.DisplayNameFor(m => m.id)</td>
+                           <td>@Html.DisplayNameFor(m => m.titulo)</td>
+                           <td>@Html.DisplayNameFor(m => m.descripcion)</td>
+                           <td>@Html.DisplayNameFor(m => m.empresa)</td>
+                           <td>@Html.DisplayNameFor(m => m.fechaPublicacion)</td>
+                           <td>@Html.DisplayNameFor(m => m.lugar)</td>
+                           <td >Acciones</td>
+                       </tr>
+
+
+                   </thead>
+
+
+                   <tbody>
+
+
+                       @foreach(var item in Model)
+                {
+                       <tr>
+                           <td>@item.id</td>
+                           <td>@item.titulo</td>
+                           <td>@item.descripcion</td>
+                           <td>@item.empresa</td>
+                           <td>@item.fechaPublicacion</td>
+                           <td>@item.lugar</td>
+                           <td>
+                               <a asp- controller="OfertaLaboral" asp-action="EditarOferta" asp-route-id="@item.id" class="btn btn-warning">Editar</a>
+                           
+                               <a asp- controller="OfertaLaboral" asp-action="EliminarOferta" asp-route-id="@item.id" class="btn btn-danger">Eliminar</a>
+
+                           </td>
+
+
+
+                       </tr>
+
+
+
+                }
+
+
+
+                   </tbody>
+
+
+
+
+
+
+
+               </table>
+
+            }else{
+        
+                    <p>No existen registros</p>
+            }
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
